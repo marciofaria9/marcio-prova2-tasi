@@ -62,5 +62,17 @@ public class MaterialTest {
 		
 	}
 	
+	@Test
+	public void testActive() {  // Teste do active com sucesso
+		Integer code = 1;
+		createMaterial();
+		Response action = RestAssured.put(materialURL + "active/" + code);
+		action.then().assertThat().statusCode(HttpStatus.SC_NO_CONTENT);
+		assertEquals(HttpStatus.SC_NO_CONTENT, action.getStatusCode());
+
+		Response resp = RestAssured.get(materialURL + code);
+		resp.then().assertThat().statusCode(HttpStatus.SC_OK);
+	}
+	
 	
 }
